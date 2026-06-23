@@ -2,90 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="assets/avatar.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Shangshang Wang</title>
+  <meta name="description" content="Shangshang Wang — living by research (Shangshang), by seeing (Ashton), and by living (Upup)." />
+  <link rel="icon" type="image/png" href="assets/avatar.png" />
+
+  <!-- Social preview (crawlers don't run the script below, so keep meta here) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shangshang Wang" />
+  <meta property="og:description" content="Living by Research, by Seeing, by Living." />
+  <meta property="og:url" content="https://shangshang-wang.github.io/" />
+  <meta property="og:image" content="https://shangshang-wang.github.io/assets/avatar.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- No JavaScript? Fall back to one version. -->
+  <noscript><meta http-equiv="refresh" content="0; url=v1.html" /></noscript>
+
   <style>
-
-    /* Reset default body spacing */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      width: 100%;
-      height: 100vh;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: #111;
-      background-color: #fff;
-      position: relative;
-    }
-
-    /*
-      Center the main text block both horizontally & vertically.
-      We'll place the text in a single line inside .one-line.
-    */
-    .wrapper {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    .small-text {
-        font-size: 2rem;
-        font-weight: 200;
-        font-style: italic;
-    }
-
-    .big-text {
-        font-family: "Montserrat", sans-serif;
-        font-size: 4rem;
-        font-weight: 500;
-        font-style: normal;
-        margin-bottom: 0.7em;
-        margin-left: 0.3em;
-    }
-
-    /* Navigation bar at bottom */
-    nav {
-      position: absolute;
-      bottom: 2%;
-      width: 100%;
-      text-align: center;
-    }
-
-    nav ul {
-      display: inline-flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      font-size: 0.95rem;
-      color: #111;
-      letter-spacing: 0.03em;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
+    html, body { margin: 0; height: 100%; background: #f4f1ea; }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <div class="small-text">Shangshang Wang</div>
-        <div class="big-text">"Upup"</div>
-    </div>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="https://shangshangwang.notion.site/academic">Research, as Shangshang</a></li>
-      <li><a href="https://shangshangwang.notion.site/personal-collection">Live, as Upup</a></li>
-    </ul>
-  </nav>
+  <script>
+    /* Cycle through the versions in order, one per visit: v1 -> v2 -> v3 -> v1 ...
+       Position is remembered in localStorage. Note: a static site has no server,
+       so the counter lives per-browser (each visitor advances on their own visits).
+       The chosen version is loaded inline so the address bar stays at "/";
+       if that isn't possible (JS fetch blocked, file://, etc.) we redirect. */
+    (function () {
+      var versions = ["v1.html", "v2.html", "v3.html"];
+      var KEY = "ssw-version-step";
+      var i = 0;
+
+      try {
+        var saved = parseInt(localStorage.getItem(KEY), 10);
+        if (!isNaN(saved)) i = ((saved % versions.length) + versions.length) % versions.length;
+        localStorage.setItem(KEY, (i + 1) % versions.length);
+      } catch (e) { /* localStorage unavailable: just start at v1 */ }
+
+      var pick = versions[i];
+
+      try {
+        fetch(pick)
+          .then(function (res) {
+            if (!res.ok) throw new Error("fetch failed");
+            return res.text();
+          })
+          .then(function (html) {
+            document.open();
+            document.write(html);
+            document.close();
+          })
+          .catch(function () { window.location.replace(pick); });
+      } catch (e) {
+        window.location.replace(pick);
+      }
+    })();
+  </script>
 </body>
 </html>

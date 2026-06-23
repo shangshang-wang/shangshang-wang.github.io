@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Shangshang Wang</title>
+  <meta name="description" content="Shangshang Wang — living by research (Shangshang), by seeing (Ashton), and by living (Upup)." />
+  <link rel="icon" type="image/png" href="assets/avatar.png" />
+
+  <!-- Social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shangshang Wang" />
+  <meta property="og:description" content="Living by Research, by Seeing, by Living." />
+  <meta property="og:url" content="https://shangshang-wang.github.io/" />
+  <meta property="og:image" content="https://shangshang-wang.github.io/assets/avatar.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Font: EB Garamond — Garamond, the quintessential French Renaissance serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --paper:  #f4f1ea;
+      --ink:    #1a1a1a;
+      --blue:   #1c4f9c;   /* circle  · Research · Shangshang */
+      --yellow: #f2b50c;   /* triangle · Seeing  · Ashton     */
+      --red:    #df2c1c;   /* square  · Living   · Upup       */
+      --link:   #55534c;
+      --who:    #2a2a28;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ---------- Hero ---------- */
+    main {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    /* Bauhaus emblem: the shape + colour triad */
+    .emblem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(14px, 4vw, 28px);
+      margin-bottom: clamp(1.6rem, 5vw, 2.7rem);
+    }
+    .shp { width: clamp(26px, 6.2vw, 40px); height: clamp(26px, 6.2vw, 40px); display: block; }
+
+    /* two layers: outer = entrance, inner = ambient drift */
+    .ein { display: inline-block; opacity: 0; animation: ein .7s cubic-bezier(.2,.7,.3,1) forwards; }
+    .amb { display: inline-block; will-change: transform; }
+    .float { animation: floaty 5.5s ease-in-out infinite; }
+    .rock  { animation: rock   7s   ease-in-out infinite; }
+    .tilt  { animation: tilt   6.2s ease-in-out infinite; }
+
+    @keyframes ein    { from { opacity: 0; transform: translateY(14px) scale(.7); } to { opacity: 1; transform: none; } }
+    @keyframes floaty { 0%,100% { transform: translateY(0); }      50% { transform: translateY(-5px); } }
+    @keyframes rock   { 0%,100% { transform: rotate(-7deg); }      50% { transform: rotate(7deg); } }
+    @keyframes tilt   { 0%,100% { transform: rotate(0deg); }       50% { transform: rotate(9deg); } }
+
+    /* Names */
+    .names {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: center;
+      gap: clamp(0.35em, 2.2vw, 0.6em);
+      line-height: 1.02;
+      color: var(--ink);
+    }
+    .nm-s { font-size: clamp(1.05rem, 3.4vw, 1.9rem); font-weight: 400; letter-spacing: .01em; color: #33312c; }
+    .nm-a { font-size: clamp(1.5rem, 5vw, 2.7rem);    font-weight: 500; color: #211f1b; }
+    .nm-u { font-size: clamp(2.4rem, 9vw, 4.2rem);    font-weight: 700; letter-spacing: -.012em; }
+
+    /* gentle fade-up for text blocks */
+    .rise { opacity: 0; animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+    /* ---------- Nav ---------- */
+    nav {
+      padding: clamp(1.25rem, 4vw, 2rem) 1rem;
+      padding-bottom: calc(clamp(1.25rem, 4vw, 2rem) + env(safe-area-inset-bottom, 0px));
+    }
+    .links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(0.9rem, 3.5vw, 2.2rem);
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--link);
+      font-size: clamp(0.82rem, 2.6vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: .01em;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 3px;
+      transition: color .22s ease, border-color .22s ease;
+    }
+    .links a .who { font-weight: 600; color: var(--who); transition: color .22s ease; }
+    .bul { display: inline-flex; }
+    .bul svg { width: 13px; height: 13px; display: block; transition: transform .3s cubic-bezier(.2,.7,.3,1); }
+
+    /* per-identity hover colour + geometric reaction */
+    .l-blue:hover, .l-blue:focus-visible     { color: var(--blue); border-color: var(--blue); outline: none; }
+    .l-blue:hover .who, .l-blue:focus-visible .who { color: var(--blue); }
+    .l-blue:hover .bul svg, .l-blue:focus-visible .bul svg { transform: scale(1.25); }
+
+    .l-yellow:hover, .l-yellow:focus-visible   { color: #9c7508; border-color: var(--yellow); outline: none; }
+    .l-yellow:hover .who, .l-yellow:focus-visible .who { color: #9c7508; }
+    .l-yellow:hover .bul svg, .l-yellow:focus-visible .bul svg { transform: rotate(72deg); }
+
+    .l-red:hover, .l-red:focus-visible       { color: var(--red); border-color: var(--red); outline: none; }
+    .l-red:hover .who, .l-red:focus-visible .who { color: var(--red); }
+    .l-red:hover .bul svg, .l-red:focus-visible .bul svg { transform: rotate(45deg); }
+
+    @media (max-width: 640px) {
+      .links { flex-direction: column; gap: 1rem; }
+      .links a { justify-content: center; }
+    }
+
+    /* Respect users who prefer no motion */
+    @media (prefers-reduced-motion: reduce) {
+      .ein, .rise { opacity: 1 !important; animation: none !important; transform: none !important; }
+      .amb { animation: none !important; }
+      .bul svg, .links a, .links a .who { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="emblem" aria-hidden="true">
+      <span class="ein" style="animation-delay:.05s"><span class="amb float"><svg class="shp" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1c4f9c"/></svg></span></span>
+      <span class="ein" style="animation-delay:.17s"><span class="amb rock"><svg class="shp" viewBox="0 0 40 40"><polygon points="20,2 38,37 2,37" fill="#f2b50c"/></svg></span></span>
+      <span class="ein" style="animation-delay:.29s"><span class="amb tilt"><svg class="shp" viewBox="0 0 40 40"><rect x="3" y="3" width="34" height="34" fill="#df2c1c"/></svg></span></span>
+    </div>
+
+    <h1 class="names">
+      <span class="rise nm-s" style="animation-delay:.42s">Shangshang&nbsp;Wang</span>
+      <span class="rise nm-a" style="animation-delay:.52s">Ashton</span>
+      <span class="rise nm-u" style="animation-delay:.62s">&ldquo;Upup&rdquo;</span>
+    </h1>
+  </main>
+
+  <nav class="rise" style="animation-delay:.78s" aria-label="Three ways of living">
+    <ul class="links">
+      <li><a class="l-blue" href="https://shangshangwang.notion.site/academic">
+        <span class="bul"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1c4f9c"/></svg></span>
+        Living by Research, as <span class="who">Shangshang</span></a></li>
+      <li><a class="l-yellow" href="https://shangshangwang.notion.site/personal-collection">
+        <span class="bul"><svg viewBox="0 0 24 24"><polygon points="12,2 22,21 2,21" fill="#f2b50c"/></svg></span>
+        Living by Seeing, as <span class="who">Ashton</span></a></li>
+      <li><a class="l-red" href="https://shangshangwang.notion.site/personal-creation">
+        <span class="bul"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="#df2c1c"/></svg></span>
+        Living by Living, as <span class="who">Upup</span></a></li>
+    </ul>
+  </nav>
+</body>
+</html>

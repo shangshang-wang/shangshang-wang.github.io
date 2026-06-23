@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Shangshang Wang</title>
+  <meta name="description" content="Shangshang Wang — living by research (Shangshang), by seeing (Ashton), and by living (Upup)." />
+  <link rel="icon" type="image/png" href="assets/avatar.png" />
+
+  <!-- Social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shangshang Wang" />
+  <meta property="og:description" content="Living by Research, by Seeing, by Living." />
+  <meta property="og:url" content="https://shangshang-wang.github.io/" />
+  <meta property="og:image" content="https://shangshang-wang.github.io/assets/avatar.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Font: Noto Serif SC — a Songti serif, in the spirit of Chinese print type -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink:   #141414;
+      --muted: #6b6b6b;
+      --paper: #fdfdfc;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;               /* steadier on mobile browser chrome */
+      display: flex;
+      flex-direction: column;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ---------- Hero: three names, one weave ---------- */
+    main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    .names {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: center;
+      gap: clamp(0.35em, 2.2vw, 0.7em);
+      font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+      font-weight: 400;
+      line-height: 1.04;
+    }
+
+    .n-shangshang {
+      font-size: clamp(1.05rem, 3.6vw, 2.05rem);
+      font-weight: 300;
+      font-style: normal;
+      color: #2b2b2b;
+    }
+    .n-ashton {
+      font-size: clamp(1.5rem, 5.4vw, 2.9rem);
+      font-weight: 400;
+      color: #1c1c1c;
+    }
+    .n-upup {
+      font-size: clamp(2.4rem, 9.2vw, 4.4rem);
+      font-weight: 600;
+      letter-spacing: -0.012em;
+    }
+
+    /* ---------- Nav: three ways of living ---------- */
+    nav {
+      padding: clamp(1.25rem, 4vw, 2rem) 1rem;
+      padding-bottom: calc(clamp(1.25rem, 4vw, 2rem) + env(safe-area-inset-bottom, 0px));
+    }
+
+    .links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: clamp(0.9rem, 3.5vw, 2.4rem);
+    }
+
+    .links a {
+      display: inline-block;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: clamp(0.8rem, 2.6vw, 0.95rem);
+      letter-spacing: 0.015em;
+      line-height: 1.4;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color .18s ease, border-color .18s ease;
+    }
+    .links a .who { font-weight: 500; color: #3a3a3a; transition: color .18s ease; }
+
+    .links a:hover,
+    .links a:focus-visible {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+      outline: none;
+    }
+    .links a:hover .who,
+    .links a:focus-visible .who { color: var(--ink); }
+
+    /* Phones: stack the long labels so nothing ever overflows */
+    @media (max-width: 640px) {
+      .links { flex-direction: column; gap: 1rem; }
+      .links a { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 class="names">
+      <span class="n-shangshang">Shangshang&nbsp;Wang</span>
+      <span class="n-ashton">Ashton</span>
+      <span class="n-upup">&ldquo;Upup&rdquo;</span>
+    </h1>
+  </main>
+
+  <nav aria-label="Three ways of living">
+    <ul class="links">
+      <li><a href="https://shangshangwang.notion.site/academic">Living by Research, as <span class="who">Shangshang</span></a></li>
+      <li><a href="https://shangshangwang.notion.site/personal-collection">Living by Seeing, as <span class="who">Ashton</span></a></li>
+      <li><a href="https://shangshangwang.notion.site/personal-creation">Living by Living, as <span class="who">Upup</span></a></li>
+    </ul>
+  </nav>
+</body>
+</html>
