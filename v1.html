@@ -26,7 +26,7 @@
     :root {
       --ink:   #141414;
       --muted: #6b6b6b;
-      --paper: #fdfdfc;
+      --paper: #eaefeb;   /* celadon — Chinese porcelain green */
     }
 
     html { -webkit-text-size-adjust: 100%; }
@@ -60,9 +60,28 @@
     main {
       flex: 1 1 auto;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    /* v1's signature: the shape triad drawn as outlines (ink line-art) */
+    .emblem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 4.2vw, 30px);
+      margin-bottom: clamp(1.6rem, 5vw, 2.7rem);
+    }
+    .shp {
+      width: clamp(28px, 6.4vw, 42px);
+      height: clamp(28px, 6.4vw, 42px);
+      display: block;
+      fill: none;
+      stroke: var(--ink);
+      stroke-width: 2.2;
+      stroke-linejoin: round;
     }
 
     .names {
@@ -77,20 +96,21 @@
     }
 
     .n-shangshang {
-      font-size: clamp(1.05rem, 3.6vw, 2.05rem);
+      font-size: clamp(0.92rem, 3vw, 1.68rem);
       font-weight: 300;
       font-style: normal;
       color: #2b2b2b;
     }
     .n-ashton {
-      font-size: clamp(1.5rem, 5.4vw, 2.9rem);
+      font-size: clamp(1.32rem, 4.4vw, 2.38rem);
       font-weight: 400;
       color: #1c1c1c;
     }
     .n-upup {
-      font-size: clamp(2.4rem, 9.2vw, 4.4rem);
+      font-size: clamp(2.1rem, 7.9vw, 3.7rem);
       font-weight: 600;
       letter-spacing: -0.012em;
+      margin-left: -0.25em;          /* pull "Upup" left (scales with size) to tighten the gap before it */
     }
 
     /* ---------- Nav: three ways of living ---------- */
@@ -109,10 +129,12 @@
     }
 
     .links a {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       text-decoration: none;
       color: var(--muted);
-      font-size: clamp(0.8rem, 2.6vw, 0.95rem);
+      font-size: clamp(0.72rem, 2.3vw, 0.84rem);
       letter-spacing: 0.015em;
       line-height: 1.4;
       border-bottom: 1px solid transparent;
@@ -120,6 +142,12 @@
       transition: color .18s ease, border-color .18s ease;
     }
     .links a .who { font-weight: 500; color: #3a3a3a; transition: color .18s ease; }
+    .bul { display: inline-flex; }
+    .bul svg {
+      width: 14px; height: 14px; display: block;
+      fill: none; stroke: var(--muted); stroke-width: 2.4;
+      stroke-linejoin: round; transition: stroke .18s ease;
+    }
 
     .links a:hover,
     .links a:focus-visible {
@@ -129,6 +157,8 @@
     }
     .links a:hover .who,
     .links a:focus-visible .who { color: var(--ink); }
+    .links a:hover .bul svg,
+    .links a:focus-visible .bul svg { stroke: var(--ink); }
 
     /* Phones: stack the long labels so nothing ever overflows */
     @media (max-width: 640px) {
@@ -141,6 +171,11 @@
 <body>
   <p class="corner">Born as Aries and being INFJ.</p>
   <main>
+    <div class="emblem" aria-hidden="true">
+      <svg class="shp" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/></svg>
+      <svg class="shp" viewBox="0 0 40 40"><polygon points="20,4 35,30 5,30"/></svg>
+      <svg class="shp" viewBox="0 0 40 40"><rect x="5" y="5" width="30" height="30"/></svg>
+    </div>
     <h1 class="names">
       <span class="n-shangshang">Shangshang&nbsp;Wang</span>
       <span class="n-ashton">Ashton</span>
@@ -150,9 +185,9 @@
 
   <nav aria-label="Three ways of living">
     <ul class="links">
-      <li><a href="https://shangshangwang.notion.site/academic">Living by Research, as <span class="who">Shangshang</span></a></li>
-      <li><a href="https://shangshangwang.notion.site/personal-collection">Living by Seeing, as <span class="who">Ashton</span></a></li>
-      <li><a href="https://shangshangwang.notion.site/personal-creation">Living by Living, as <span class="who">Upup</span></a></li>
+      <li><a href="https://shangshangwang.notion.site/academic"><span class="bul"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Living by Research, as <span class="who">Shangshang</span></a></li>
+      <li><a href="https://shangshangwang.notion.site/personal-collection"><span class="bul"><svg viewBox="0 0 24 24"><polygon points="12,4 20,19 4,19"/></svg></span>Living by Seeing, as <span class="who">Ashton</span></a></li>
+      <li><a href="https://shangshangwang.notion.site/personal-creation"><span class="bul"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg></span>Living by Living, as <span class="who">Upup</span></a></li>
     </ul>
   </nav>
 </body>
