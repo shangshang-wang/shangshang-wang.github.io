@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Shangshang Wang</title>
-  <meta name="description" content="Shangshang Wang — living by research (Shangshang), by seeing (Ashton), and by living (Upup)." />
+  <meta name="description" content="Shangshang Wang — slow research (Shangshang), slow attention (Ashton), and slow thinking (Upup)." />
   <link rel="icon" type="image/png" href="assets/avatar.png" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Shangshang Wang" />
-  <meta property="og:description" content="Living by Research, by Seeing, by Living." />
+  <meta property="og:description" content="Slow Research, Slow Attention, Slow Thinking." />
   <meta property="og:url" content="https://shangshang-wang.github.io/" />
   <meta property="og:image" content="https://shangshang-wang.github.io/assets/avatar.png" />
   <meta name="twitter:card" content="summary" />
@@ -56,6 +56,7 @@
       font-weight: 500;
       color: #6d6a61;
     }
+    .corner span { white-space: nowrap; }
 
     /* ---------- Hero ---------- */
     main {
@@ -124,7 +125,6 @@
     .links a {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
       text-decoration: none;
       color: var(--link);
       font-size: clamp(0.75rem, 2.35vw, 0.86rem);
@@ -135,6 +135,15 @@
       transition: color .22s ease, border-color .22s ease;
     }
     .links a .who { font-weight: 500; color: var(--who); transition: color .22s ease; }
+
+    /* Spacing: the flex `gap` used to serve double duty (mark->text and
+       text->name), which made the pre-name gap ~2.6x a word space and
+       exaggerated the side-bearing differences between S / A / U.
+       Split them, then hand-kern the two capitals. */
+    .bul { margin-right: 9px; }
+    .links a .who { margin-left: .30em; }
+    .links li:nth-child(2) .who { margin-left: .25em; }  /* "A" — open diagonal */
+    .links li:nth-child(3) .who { margin-left: .27em; }  /* "U" — open bowl */
     .bul svg { width: 14px; height: 14px; display: block; transform-box: fill-box; transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.3,1); }
 
     .links a:hover, .links a:focus-visible { color: var(--ink); border-color: var(--ink); outline: none; }
@@ -157,7 +166,7 @@
   </style>
 </head>
 <body>
-  <p class="corner">Born as Aries and being INFJ.</p>
+  <p class="corner"><span>Research is attention with a method;</span> <span>thinking is attention with time.</span></p>
   <main>
     <div class="emblem" aria-hidden="true">
       <span class="ein" style="animation-delay:.05s">
@@ -184,17 +193,17 @@
     </h1>
   </main>
 
-  <nav class="rise" style="animation-delay:.78s" aria-label="Three ways of living">
+  <nav class="rise" style="animation-delay:.78s" aria-label="Three slow ways of living">
     <ul class="links">
       <li><a class="l-c" href="https://shangshangwang.notion.site/academic">
         <span class="bul"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/></svg></span>
-        Living by Research, as <span class="who">Shangshang</span></a></li>
+        Slow Research of <span class="who">Shangshang</span></a></li>
       <li><a class="l-t" href="https://shangshangwang.notion.site/personal-collection">
         <span class="bul"><svg viewBox="0 0 24 24"><polygon points="12,3 21,20 3,20" fill="#1a1a1a"/></svg></span>
-        Living by Seeing, as <span class="who">Ashton</span></a></li>
+        Slow Attention of <span class="who">Ashton</span></a></li>
       <li><a class="l-s" href="https://shangshangwang.notion.site/personal-creation">
         <span class="bul"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="#1a1a1a"/></svg></span>
-        Living by Living, as <span class="who">Upup</span></a></li>
+        Slow Thinking of <span class="who">Upup</span></a></li>
     </ul>
   </nav>
 </body>
