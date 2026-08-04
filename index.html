@@ -43,7 +43,11 @@
       var pick = versions[i];
 
       try {
-        fetch(pick)
+        /* cache: "no-cache" keeps the cached copy but forces a conditional
+           request (If-None-Match), so a deploy is visible immediately instead
+           of up to 10 minutes later — GitHub Pages serves max-age=600.
+           Costs one round trip; a 304 carries no body. */
+        fetch(pick, { cache: "no-cache" })
           .then(function (res) {
             if (!res.ok) throw new Error("fetch failed");
             return res.text();
