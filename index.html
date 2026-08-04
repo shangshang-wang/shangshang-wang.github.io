@@ -24,13 +24,13 @@
 </head>
 <body>
   <script>
-    /* Cycle through the versions in order, one per visit: v1 -> v2 -> v3 -> v1 ...
+    /* Cycle through the versions in order, one per visit: v1 -> v2 -> v1 ...
        Position is remembered in localStorage. Note: a static site has no server,
        so the counter lives per-browser (each visitor advances on their own visits).
        The chosen version is loaded inline so the address bar stays at "/";
        if that isn't possible (JS fetch blocked, file://, etc.) we redirect. */
     (function () {
-      var versions = ["v1.html", "v2.html", "v3.html"];
+      var versions = ["v1.html", "v2.html"];
       var KEY = "ssw-version-step";
       var i = 0;
 
