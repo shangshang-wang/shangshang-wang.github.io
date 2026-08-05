@@ -61,6 +61,29 @@
     }
     .corner span { white-space: nowrap; }
 
+    /* Signature under the names — hairline draws out from the centre,
+       then the text fades in. Sits in the page's existing entrance
+       sequence: emblem .05-.29s -> names .42-.62s -> rule .66s ->
+       signature .86s -> nav .78s. */
+    .sig {
+      margin-top: clamp(1.1rem, 3.4vw, 1.9rem);
+      font-size: clamp(0.7rem, 2.1vw, 0.82rem);
+      font-weight: 500;
+      letter-spacing: .06em;
+      line-height: 1.4;
+      color: #8d8a80;
+      position: relative;
+      padding-top: clamp(.75rem, 2vw, 1.05rem);
+    }
+    .sig::before {
+      content: ""; position: absolute; top: 0; left: 50%;
+      width: clamp(38px, 9vw, 62px); height: 1px; background: #bdb6a9;
+      transform: translateX(-50%) scaleX(0); transform-origin: center;
+      animation: rule .85s cubic-bezier(.2,.7,.3,1) .66s forwards;
+    }
+    @keyframes rule { to { transform: translateX(-50%) scaleX(1); } }
+
+
     /* ---------- Hero ---------- */
     main {
       flex: 1 1 auto;
@@ -172,6 +195,7 @@
     /* Respect users who prefer no motion */
     @media (prefers-reduced-motion: reduce) {
       .ein, .rise { opacity: 1 !important; animation: none !important; transform: none !important; }
+      .sig::before { animation: none !important; transform: translateX(-50%) scaleX(1) !important; }
       .amb { animation: none !important; }
       .bul svg, .links a, .links a .who { transition: none !important; }
     }
@@ -191,6 +215,7 @@
       <span class="rise nm-a" style="animation-delay:.52s">Ashton</span>
       <span class="rise nm-u" style="animation-delay:.62s">&ldquo;Upup&rdquo;</span>
     </h1>
+    <p class="sig rise" style="animation-delay:.86s">Born Aries, being INFJ.</p>
   </main>
 
   <nav class="rise" style="animation-delay:.78s" aria-label="Three slow ways of living">
