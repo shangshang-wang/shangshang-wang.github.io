@@ -44,6 +44,13 @@
       text-rendering: optimizeLegibility;
     }
 
+    /* Lift the whole stack off the bottom edge: the nav used to sit 32px from
+       the floor while ~276px went unused up top. Trimming the flex column from
+       the bottom moves main's centred hero up by half the amount and the nav up
+       by all of it. Declared here, above the media queries, so the short-viewport
+       override below actually wins — same specificity, later rule takes it. */
+    body { padding-bottom: clamp(1rem, 20vh, 13rem); }
+
     /* epigraph, centred just above the three links */
     .corner {
       margin: 0 auto clamp(.8rem, 2.3vw, 1.25rem);
@@ -213,6 +220,7 @@
        full-scale layout overflows. Scale the whole stack down instead of
        letting the page scroll. */
     @media (max-height: 470px) and (orientation: landscape) {
+      body    { padding-bottom: .5rem; }
       main    { padding: .6rem 1rem; }
       .emblem { margin-bottom: .7rem; }
       .shp    { width: 22px; height: 22px; }
