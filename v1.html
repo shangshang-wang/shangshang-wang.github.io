@@ -200,15 +200,15 @@
     /* start-aligned so the gap after the mark stays constant when the short
        label shows; the reserved extra width spills to the right instead. */
     .lbl { display: grid; justify-items: start; align-items: center; }
-    /* Stacked on phones: centring each label inside its own reserved cell
-       left a dead gap after the mark, and start-aligning them individually
-       left the three rows ragged (each cell is a different width). Instead
-       make the list shrink-to-fit and centre the LIST, so all three rows
-       share one left edge — marks in one column, labels in another. */
+    /* Stacked on phones: the mark moves inside each label so that the short
+       state reads as one centred unit. Centring the label alone would have
+       left the mark stranded at the left edge of the reserved (wider) cell. */
+    .bul.in { display: none; }
     @media (max-width: 640px) {
-      .links { align-items: flex-start; width: max-content; max-width: 100%;
-               margin-inline: auto; }
-      .links a { justify-content: flex-start; }
+      .bul.out { display: none; }
+      .bul.in  { display: inline-flex; margin-right: 9px; }
+      .lbl { justify-items: center; }
+      .links a { justify-content: center; }
     }
     .lbl > span {
       grid-area: 1 / 1;
@@ -220,11 +220,6 @@
           animation: swapB 9s ease-in-out calc(1.4s + var(--i) * 1.1s) infinite; }
     @keyframes swapA { 0%, 32%, 68%, 100% { opacity: 1 } 40%, 60% { opacity: 0 } }
     @keyframes swapB { 0%, 32%, 68%, 100% { opacity: 0 } 40%, 60% { opacity: 1 } }
-
-    @media (hover: hover) {
-      .links a:hover .t1, .links a:focus-visible .t1 { animation: none; opacity: 0; }
-      .links a:hover .t2, .links a:focus-visible .t2 { animation: none; opacity: 1; }
-    }
 
     .bul svg { width: 13px; height: 13px; display: block; transition: transform .3s cubic-bezier(.2,.7,.3,1); }
 
@@ -310,14 +305,14 @@
   <nav class="rise" style="animation-delay:.78s" aria-label="Three slow ways of living">
     <ul class="links">
       <li><a class="l-blue" href="https://shangshangwang.notion.site/academic" aria-label="Slow Research — Shangshang, the inquiring self">
-        <span class="bul" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1c4f9c"/></svg></span>
-        <span class="lbl" aria-hidden="true" style="--i:0"><span class="t1">Slow Research</span><span class="t2"><span class="who">Shangshang</span>&#8202;&mdash;&#8202;the inquiring self</span></span></a></li>
+        <span class="bul out" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1c4f9c"/></svg></span>
+        <span class="lbl" aria-hidden="true" style="--i:0"><span class="t1"><span class="bul in" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1c4f9c"/></svg></span>Slow Research</span><span class="t2"><span class="bul in" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1c4f9c"/></svg></span><span class="who">Shangshang</span>&#8202;&mdash;&#8202;the inquiring self</span></span></a></li>
       <li><a class="l-yellow" href="https://shangshangwang.notion.site/personal-collection" aria-label="Close Attention — Ashton, the aesthetic self">
-        <span class="bul" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12,2 22,21 2,21" fill="#f2b50c"/></svg></span>
-        <span class="lbl" aria-hidden="true" style="--i:1"><span class="t1">Close Attention</span><span class="t2"><span class="who">Ashton</span>&#8202;&mdash;&#8202;the aesthetic self</span></span></a></li>
+        <span class="bul out" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12,2 22,21 2,21" fill="#f2b50c"/></svg></span>
+        <span class="lbl" aria-hidden="true" style="--i:1"><span class="t1"><span class="bul in" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12,2 22,21 2,21" fill="#f2b50c"/></svg></span>Close Attention</span><span class="t2"><span class="bul in" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12,2 22,21 2,21" fill="#f2b50c"/></svg></span><span class="who">Ashton</span>&#8202;&mdash;&#8202;the aesthetic self</span></span></a></li>
       <li><a class="l-red" href="https://shangshangwang.notion.site/personal-creation" aria-label="Quiet Thinking — Upup, the reflective self">
-        <span class="bul" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="#df2c1c"/></svg></span>
-        <span class="lbl" aria-hidden="true" style="--i:2"><span class="t1">Quiet Thinking</span><span class="t2"><span class="who">Upup</span>&#8202;&mdash;&#8202;the reflective self</span></span></a></li>
+        <span class="bul out" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="#df2c1c"/></svg></span>
+        <span class="lbl" aria-hidden="true" style="--i:2"><span class="t1"><span class="bul in" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="#df2c1c"/></svg></span>Quiet Thinking</span><span class="t2"><span class="bul in" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="#df2c1c"/></svg></span><span class="who">Upup</span>&#8202;&mdash;&#8202;the reflective self</span></span></a></li>
     </ul>
   </nav>
 </body>
