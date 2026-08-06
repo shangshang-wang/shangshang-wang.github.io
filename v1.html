@@ -47,12 +47,12 @@
       text-rendering: optimizeLegibility;
     }
 
-    /* small note pinned to the top-left corner */
+    /* epigraph, centred just above the three links */
     .corner {
-      position: absolute;
-      top:  calc(clamp(1rem, 4vw, 1.6rem) + env(safe-area-inset-top, 0px));
-      left: calc(clamp(1rem, 4vw, 1.6rem) + env(safe-area-inset-left, 0px));
-      max-width: 64vw;
+      margin: 0 auto clamp(.8rem, 2.3vw, 1.25rem);
+      max-width: min(88vw, 44rem);
+      padding: 0 1rem;
+      text-align: center;
       font-size: clamp(0.72rem, 2.3vw, 0.85rem);
       letter-spacing: 0.01em;
       line-height: 1.4;
@@ -206,7 +206,35 @@
     @media (max-width: 640px) {
       .links { flex-direction: column; gap: 1rem; }
       .links a { justify-content: center; }
-      .corner { top: max(2.9rem, calc(env(safe-area-inset-top, 0px) + 0.7rem)); }
+    }
+
+
+    /* Tap target: the visible label is ~20px tall, well under the 24x24 CSS px
+       floor in WCAG 2.2 SC 2.5.8. Expand the hit area with a pseudo-element so
+       the type, the underline and the layout all stay exactly as they were. */
+    .links a { position: relative; }
+    .links a::after {
+      content: ""; position: absolute; inset: -7px -10px;
+    }
+    @media (max-width: 640px) {
+      .links a::after { inset: -12px -14px; }
+    }
+
+    /* Short viewports — a phone in landscape is ~320-430px tall, which the
+       full-scale layout overflows. Scale the whole stack down instead of
+       letting the page scroll. */
+    @media (max-height: 470px) and (orientation: landscape) {
+      main    { padding: .6rem 1rem; }
+      .emblem { margin-bottom: .7rem; }
+      .shp    { width: 22px; height: 22px; }
+      .nm-s   { font-size: .95rem; }
+      .nm-a   { font-size: 1.3rem; }
+      .nm-u   { font-size: 2rem; }
+      .sig    { margin-top: .5rem; padding-top: .5rem; }
+      .corner { margin-bottom: .5rem; }
+      nav     { padding: .55rem 1rem; padding-bottom: calc(.55rem + env(safe-area-inset-bottom, 0px)); }
+      .links  { gap: 1.1rem; }
+      .links a::after { inset: -7px -10px; }
     }
 
     /* Respect users who prefer no motion */
@@ -220,7 +248,6 @@
   </style>
 </head>
 <body>
-  <p class="corner"><span>Research is attention with timing;</span> <span>thinking is attention with time.</span></p>
   <main>
     <div class="emblem" aria-hidden="true">
       <span class="ein" style="animation-delay:.05s"><span class="amb float"><svg class="shp" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1c4f9c"/></svg></span></span>
@@ -239,6 +266,7 @@
     </p>
   </main>
 
+  <p class="corner rise" style="animation-delay:.74s"><span>Research is attention with timing;</span> <span>thinking is attention with time.</span></p>
   <nav class="rise" style="animation-delay:.78s" aria-label="Three slow ways of living">
     <ul class="links">
       <li><a class="l-blue" href="https://shangshangwang.notion.site/academic">
