@@ -44,13 +44,6 @@
       text-rendering: optimizeLegibility;
     }
 
-    /* Lift the whole stack off the bottom edge: the nav used to sit 32px from
-       the floor while ~276px went unused up top. Trimming the flex column from
-       the bottom moves main's centred hero up by half the amount and the nav up
-       by all of it. Declared here, above the media queries, so the short-viewport
-       override below actually wins — same specificity, later rule takes it. */
-    body { padding-bottom: clamp(1rem, 15vh, 10rem); }
-
     /* epigraph, centred just above the three links */
     .corner {
       margin: 0 auto clamp(.8rem, 2.3vw, 1.25rem);
@@ -115,6 +108,10 @@
       text-align: center;
       padding: clamp(1.5rem, 5vw, 3rem);
     }
+    /* Bias the hero upward: extra bottom padding shifts flex-centred content
+       up by half the amount, leaving the epigraph and nav exactly where they are.
+       Declared above the media queries so the short-viewport override still wins. */
+    main { padding-bottom: calc(clamp(1.5rem, 5vw, 3rem) + 12vh); }
 
     /* The shape triad — now monochrome, each transforming within its own family */
     .emblem {
@@ -220,7 +217,6 @@
        full-scale layout overflows. Scale the whole stack down instead of
        letting the page scroll. */
     @media (max-height: 470px) and (orientation: landscape) {
-      body    { padding-bottom: .5rem; }
       main    { padding: .6rem 1rem; }
       .emblem { margin-bottom: .7rem; }
       .shp    { width: 22px; height: 22px; }
