@@ -78,6 +78,23 @@
       transform: translateX(-50%) scaleX(0); transform-origin: center;
       animation: rule .85s cubic-bezier(.2,.7,.3,1) .66s forwards;
     }
+
+    /* Letter-by-letter wave, left to right, once every 5s.
+       The weight is faked with text-shadow rather than font-weight:
+       a real weight change alters advance widths and shoves the rest
+       of the line sideways (measured 1.5px of drift). text-shadow is
+       paint-only, so the line never reflows. */
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden;
+               clip-path: inset(50%); white-space: nowrap; user-select: none; }
+    .sig i {
+      font-style: normal;
+      animation: wave 5s ease-in-out infinite;
+      animation-delay: calc(1.7s + var(--i) * .062s);
+    }
+    @keyframes wave {
+      0%, 9%, 100% { text-shadow: none; }
+      4.5%         { text-shadow: .28px 0 0 currentColor, -.28px 0 0 currentColor; }
+    }
     @keyframes rule { to { transform: translateX(-50%) scaleX(1); } }
 
 
@@ -184,6 +201,7 @@
     @media (prefers-reduced-motion: reduce) {
       .ein, .rise { opacity: 1 !important; animation: none !important; transform: none !important; }
       .sig::before { animation: none !important; transform: translateX(-50%) scaleX(1) !important; }
+      .sig i { animation: none !important; }
       .spin-c, .spin-t, .spin-s { animation: none !important; transform: none !important; }
       .bul svg, .links a, .links a .who { transition: none !important; }
     }
@@ -215,7 +233,10 @@
       <span class="rise nm-a" style="animation-delay:.52s">Ashton</span>
       <span class="rise nm-u" style="animation-delay:.62s">&ldquo;Upup&rdquo;</span>
     </h1>
-    <p class="sig rise" style="animation-delay:.86s">Born Aries, being INFJ.</p>
+    <p class="sig rise" style="animation-delay:.86s">
+      <span class="sr-only">Born Aries, being INFJ.</span>
+      <span aria-hidden="true"><i style="--i:0">B</i><i style="--i:1">o</i><i style="--i:2">r</i><i style="--i:3">n</i> <i style="--i:4">A</i><i style="--i:5">r</i><i style="--i:6">i</i><i style="--i:7">e</i><i style="--i:8">s</i><i style="--i:9">,</i> <i style="--i:10">b</i><i style="--i:11">e</i><i style="--i:12">i</i><i style="--i:13">n</i><i style="--i:14">g</i> <i style="--i:15">I</i><i style="--i:16">N</i><i style="--i:17">F</i><i style="--i:18">J</i><i style="--i:19">.</i></span>
+    </p>
   </main>
 
   <nav class="rise" style="animation-delay:.78s" aria-label="Three slow ways of living">
