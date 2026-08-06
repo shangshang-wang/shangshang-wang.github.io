@@ -185,9 +185,43 @@
        exaggerated the side-bearing differences between S / A / U.
        Split them, then hand-kern the two capitals. */
     .bul { margin-right: 9px; }
-    .links a .who { margin-left: .30em; }
-    .links li:nth-child(2) .who { margin-left: .25em; }  /* "A" — open diagonal */
-    .links li:nth-child(3) .who { margin-left: .27em; }  /* "U" — open bowl */
+
+    /* ---- Label crossfade -------------------------------------------------
+       Each link holds two labels stacked in one grid cell, so the cell is as
+       wide as the LONGER of the two and nothing reflows when they swap — a
+       width transition here would shove the whole nav row sideways.
+       The pair alternates on a 9s cycle, staggered per link. On pointer
+       devices, hover cancels the animation and pins the second label; the
+       restart delay lets the fade back play before the cycle resumes. */
+    /* start-aligned so the gap after the mark stays constant when the short
+       label shows; the reserved extra width spills to the right instead. */
+    .lbl { display: grid; justify-items: start; align-items: center; }
+    /* Stacked on phones: centring each label inside its own reserved cell
+       left a dead gap after the mark, and start-aligning them individually
+       left the three rows ragged (each cell is a different width). Instead
+       make the list shrink-to-fit and centre the LIST, so all three rows
+       share one left edge — marks in one column, labels in another. */
+    @media (max-width: 640px) {
+      .links { align-items: flex-start; width: max-content; max-width: 100%;
+               margin-inline: auto; }
+      .links a { justify-content: flex-start; }
+    }
+    .lbl > span {
+      grid-area: 1 / 1;
+      white-space: nowrap;
+      transition: opacity .42s ease;
+    }
+    .t1 { animation: swapA 9s ease-in-out calc(1.4s + var(--i) * 1.1s) infinite; }
+    .t2 { opacity: 0;
+          animation: swapB 9s ease-in-out calc(1.4s + var(--i) * 1.1s) infinite; }
+    @keyframes swapA { 0%, 32%, 68%, 100% { opacity: 1 } 40%, 60% { opacity: 0 } }
+    @keyframes swapB { 0%, 32%, 68%, 100% { opacity: 0 } 40%, 60% { opacity: 1 } }
+
+    @media (hover: hover) {
+      .links a:hover .t1, .links a:focus-visible .t1 { animation: none; opacity: 0; }
+      .links a:hover .t2, .links a:focus-visible .t2 { animation: none; opacity: 1; }
+    }
+
     .bul svg { width: 14px; height: 14px; display: block; transform-box: fill-box; transform-origin: center; transition: transform .32s cubic-bezier(.2,.7,.3,1); }
 
     .links a:hover, .links a:focus-visible { color: var(--ink); border-color: var(--ink); outline: none; }
@@ -236,6 +270,8 @@
       .sig i { animation: none !important; }
       .spin-c, .spin-t, .spin-s { animation: none !important; transform: none !important; }
       .bul svg, .links a, .links a .who { transition: none !important; }
+      .t1, .t2 { animation: none !important; transition: none !important; }
+      .t1 { opacity: 1 !important; } .t2 { opacity: 0 !important; }
     }
   </style>
 </head>
@@ -273,15 +309,15 @@
   <p class="corner rise" style="animation-delay:.74s"><span>Research is attention with timing;</span> <span>thinking is attention with time.</span></p>
   <nav class="rise" style="animation-delay:.78s" aria-label="Three slow ways of living">
     <ul class="links">
-      <li><a class="l-c" href="https://shangshangwang.notion.site/academic">
-        <span class="bul"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/></svg></span>
-        Slow Research of <span class="who">Shangshang</span></a></li>
-      <li><a class="l-t" href="https://shangshangwang.notion.site/personal-collection">
-        <span class="bul"><svg viewBox="0 0 24 24"><polygon points="12,3 21,20 3,20" fill="#1a1a1a"/></svg></span>
-        Close Attention of <span class="who">Ashton</span></a></li>
-      <li><a class="l-s" href="https://shangshangwang.notion.site/personal-creation">
-        <span class="bul"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="#1a1a1a"/></svg></span>
-        Quiet Thinking of <span class="who">Upup</span></a></li>
+      <li><a class="l-c" href="https://shangshangwang.notion.site/academic" aria-label="Slow Research — Shangshang, the inquiring self">
+        <span class="bul" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/></svg></span>
+        <span class="lbl" aria-hidden="true" style="--i:0"><span class="t1">Slow Research</span><span class="t2"><span class="who">Shangshang</span>&#8202;&mdash;&#8202;the inquiring self</span></span></a></li>
+      <li><a class="l-t" href="https://shangshangwang.notion.site/personal-collection" aria-label="Close Attention — Ashton, the aesthetic self">
+        <span class="bul" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12,3 21,20 3,20" fill="#1a1a1a"/></svg></span>
+        <span class="lbl" aria-hidden="true" style="--i:1"><span class="t1">Close Attention</span><span class="t2"><span class="who">Ashton</span>&#8202;&mdash;&#8202;the aesthetic self</span></span></a></li>
+      <li><a class="l-s" href="https://shangshangwang.notion.site/personal-creation" aria-label="Quiet Thinking — Upup, the reflective self">
+        <span class="bul" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="#1a1a1a"/></svg></span>
+        <span class="lbl" aria-hidden="true" style="--i:2"><span class="t1">Quiet Thinking</span><span class="t2"><span class="who">Upup</span>&#8202;&mdash;&#8202;the reflective self</span></span></a></li>
     </ul>
   </nav>
 </body>
